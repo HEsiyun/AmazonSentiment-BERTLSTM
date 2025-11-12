@@ -9,7 +9,7 @@
 This project investigates three NLP architectures — **LSTM**, **BERT**, and **BitLinear BERT** — for **sentiment analysis** on a massive Amazon reviews dataset (14M+ entries).  
 It benchmarks model performance, efficiency, and scalability, providing insights into how modern transformer models compare with classical recurrent networks under different resource constraints.
 
-> **Goal:** Identify which architecture best captures sentiment patterns in large-scale review data, balancing accuracy and computational cost.  [oai_citation:0‡Group18_final_project_report.pdf](sediment://file_000000000c0871f58cb2b485bb7698df)
+> **Goal:** Identify which architecture best captures sentiment patterns in large-scale review data, balancing accuracy and computational cost.
 
 ---
 
@@ -25,13 +25,12 @@ It benchmarks model performance, efficiency, and scalability, providing insights
 - Implemented using `Hugging Face Transformers` (`bert-base-cased`).
 - Fine-tuned from scratch for binary sentiment classification.
 - Trained with **AdamW optimizer**, 3 epochs, learning rates 2e-5 ~ 5e-5.
-- Achieved **90.7% test accuracy**, **precision = recall = 0.91**, **AUC = 0.97** — the best performer.  [oai_citation:1‡Group18_final_project_report.pdf](sediment://file_000000000c0871f58cb2b485bb7698df)
-
+- Achieved **90.7% test accuracy**, **precision = recall = 0.91**, **AUC = 0.97** — the best performer. 
 ### 3. BitLinear BERT (1-bit Quantized BERT)
 - Leverages **BitNet’s 1-bit quantization** via open-source `BitNet` library by Kye Gomez.
 - Replaces linear layers with **BitLinear** for reduced computation and memory.
 - Reaches **~84% accuracy**, on par with LSTM but at a fraction of the resource cost.  
-  > Demonstrates efficiency potential for LLMs in low-resource environments.  [oai_citation:2‡Group18_final_project_report.pdf](sediment://file_000000000c0871f58cb2b485bb7698df)
+  > Demonstrates efficiency potential for LLMs in low-resource environments. 
 
 ---
 
@@ -62,7 +61,7 @@ It benchmarks model performance, efficiency, and scalability, providing insights
 - **BERT** excels in contextual understanding and robustness, requiring minimal hyperparameter tuning.
 - **LSTM** remains viable for lightweight setups, though sensitive to learning rate and dropout adjustments.
 - **BitLinear BERT** proves that **quantization** can substantially reduce memory and compute needs without drastic performance loss.  
-  A promising direction for edge deployment and on-device inference.  [oai_citation:4‡Group18_final_project_report.pdf](sediment://file_000000000c0871f58cb2b485bb7698df)
+  A promising direction for edge deployment and on-device inference.
 
 ---
 
