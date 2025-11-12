@@ -43,12 +43,6 @@ It benchmarks model performance, efficiency, and scalability, providing insights
 - Text cleaning:
   - Removed HTML, URLs, non-alphabetic characters.
   - Tokenized and padded to consistent length (100 for LSTM, 150 for BERT).
-- Generated word clouds pre- and post-cleaning for validation.  [oai_citation:3‡Group18_final_project_report.pdf](sediment://file_000000000c0871f58cb2b485bb7698df)
-
-<p align="center">
-  <img src="images/wordcloud.png" alt="Word Cloud Before and After Cleaning" width="550"/>
-</p>
-
 ---
 
 ## 📊 Results Summary
@@ -60,10 +54,6 @@ It benchmarks model performance, efficiency, and scalability, providing insights
 | **BitLinear BERT** | 0.84 | 0.84 | 0.84 | 0.92 |
 
 > 🔍 *BERT clearly leads in all metrics, but BitLinear BERT shows promise for efficient deployment on limited hardware.*
-
-<p align="center">
-  <img src="images/roc_comparison.png" alt="ROC Comparison" width="550"/>
-</p>
 
 ---
 
