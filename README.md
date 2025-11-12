@@ -1,20 +1,98 @@
-# nlp-final-project
-## LSTM model
-***LSTM.ipynb:*** The code for the LSTM model is available in LSTM.ipynb. It demonstrates the implementation of a bidirectional LSTM, with the single-layer and multi-layer LSTM variants commented out. <br>
-## BERT
-***BERT.ipynb:*** The implementation of BERT model with batch size = 64, learning rate = 2e-5, and epochs = 3. <br>
-***BERT_lr3.ipynb:*** The implementation of BERT model with batch size = 64, learning rate = 3e-5, and epochs = 3. <br>
-***BERT_lr5.ipynb:*** The implementation of BERT model with batch size = 64, learning rate = 5e-5, and epochs = 3. <br>
-***BERT_batch32.ipynb:*** The implementation of BERT model with batch size = 32, learning rate = 2e-5, and epochs = 3. <br>
-***BERT_batch32_lr3.ipynb:*** The implementation of BERT model with batch size = 32, learning rate = 3e-5, and epochs = 3. <br>
-These implementations are identical except for differences in hyperparameter settings. All files are retained to observe the results under various configurations.
-## BitLineared BERT
-***BitLinear_Bert.ipynb:*** The implementation of BitLineared BERT model with batch size = 64, learning rate = 2e-5, and epochs = 3. <br>
-***BitLinear_Bert_batch32.ipynb:*** The implementation of BitLineared BERT model with batch size = 32, learning rate = 2e-5, and epochs = 3. <br>
-These implementations are identical except for differences in hyperparameter settings. All files are retained to observe the results under various configurations.
-## Data preprocess
-***data_preprocess:*** The data preprocessing steps. <br>
-## References
-[1] J. Brownlee, “Sequence Classification with LSTM recurrent neural networks in python with keras,” MachineLearningMastery.com, https://machinelearningmastery.com/sequence-classification-lstm-recurrent-neural-networks-python-keras/ <br>
-[2]  “Sentiment analysis with Bert and transformers by hugging face using pytorch and python,” Curiousily, https://curiousily.com/posts/sentiment-analysis-with-bert-and-hugging-face-using-pytorch-and-python/ <br>
-[3] Kyegomez, “Kyegomez/BITNET: Implementation of ‘Bitnet: Scaling 1-bit transformers for large language models’ in pytorch,” GitHub, https://github.com/kyegomez/BitNet 
+# 🧠 Sentiment Analysis using LSTM, BERT, and BitLinear BERT
+
+> Exploring deep learning architectures for large-scale sentiment classification on Amazon reviews.
+
+---
+
+## 📘 Overview
+
+This project investigates three NLP architectures — **LSTM**, **BERT**, and **BitLinear BERT** — for **sentiment analysis** on a massive Amazon reviews dataset (14M+ entries).  
+It benchmarks model performance, efficiency, and scalability, providing insights into how modern transformer models compare with classical recurrent networks under different resource constraints.
+
+> **Goal:** Identify which architecture best captures sentiment patterns in large-scale review data, balancing accuracy and computational cost.  [oai_citation:0‡Group18_final_project_report.pdf](sediment://file_000000000c0871f58cb2b485bb7698df)
+
+---
+
+## 🧩 Models Implemented
+
+### 1. LSTM (Long Short-Term Memory)
+- Built with TensorFlow / Keras.
+- Explores single-layer, multi-layer, and bidirectional variants.
+- Hyperparameters tuned for input dimension, dropout, and batch size.
+- Achieved **84% test accuracy**, with **AUC = 0.92** on balanced review data.
+
+### 2. BERT (Transformer-based Model)
+- Implemented using `Hugging Face Transformers` (`bert-base-cased`).
+- Fine-tuned from scratch for binary sentiment classification.
+- Trained with **AdamW optimizer**, 3 epochs, learning rates 2e-5 ~ 5e-5.
+- Achieved **90.7% test accuracy**, **precision = recall = 0.91**, **AUC = 0.97** — the best performer.  [oai_citation:1‡Group18_final_project_report.pdf](sediment://file_000000000c0871f58cb2b485bb7698df)
+
+### 3. BitLinear BERT (1-bit Quantized BERT)
+- Leverages **BitNet’s 1-bit quantization** via open-source `BitNet` library by Kye Gomez.
+- Replaces linear layers with **BitLinear** for reduced computation and memory.
+- Reaches **~84% accuracy**, on par with LSTM but at a fraction of the resource cost.  
+  > Demonstrates efficiency potential for LLMs in low-resource environments.  [oai_citation:2‡Group18_final_project_report.pdf](sediment://file_000000000c0871f58cb2b485bb7698df)
+
+---
+
+## 🧹 Data Preparation
+
+- Dataset: [Amazon Reviews (14M lines)](https://www.kaggle.com/datasets/zakariaolamine/massive-amazon-reviews-collection-14m-lines)
+- Sampled **0.5% subset (~43k reviews)** for local experiments.
+- Balanced classes via **undersampling** (21,685 positive / 21,685 negative).  
+- Text cleaning:
+  - Removed HTML, URLs, non-alphabetic characters.
+  - Tokenized and padded to consistent length (100 for LSTM, 150 for BERT).
+- Generated word clouds pre- and post-cleaning for validation.  [oai_citation:3‡Group18_final_project_report.pdf](sediment://file_000000000c0871f58cb2b485bb7698df)
+
+<p align="center">
+  <img src="images/wordcloud.png" alt="Word Cloud Before and After Cleaning" width="550"/>
+</p>
+
+---
+
+## 📊 Results Summary
+
+| Model | Test Accuracy | Precision | Recall | AUC |
+|:------|:--------------:|:----------:|:--------:|:----:|
+| **LSTM (Bidirectional)** | 0.84 | 0.83 | 0.85 | 0.92 |
+| **BERT (Base)** | **0.91** | **0.91** | **0.91** | **0.97** |
+| **BitLinear BERT** | 0.84 | 0.84 | 0.84 | 0.92 |
+
+> 🔍 *BERT clearly leads in all metrics, but BitLinear BERT shows promise for efficient deployment on limited hardware.*
+
+<p align="center">
+  <img src="images/roc_comparison.png" alt="ROC Comparison" width="550"/>
+</p>
+
+---
+
+## 💬 Discussion
+
+- **BERT** excels in contextual understanding and robustness, requiring minimal hyperparameter tuning.
+- **LSTM** remains viable for lightweight setups, though sensitive to learning rate and dropout adjustments.
+- **BitLinear BERT** proves that **quantization** can substantially reduce memory and compute needs without drastic performance loss.  
+  A promising direction for edge deployment and on-device inference.  [oai_citation:4‡Group18_final_project_report.pdf](sediment://file_000000000c0871f58cb2b485bb7698df)
+
+---
+
+## 🧠 Key Takeaways
+
+- Transformer models dominate large-scale sentiment analysis tasks.
+- Quantized models offer practical trade-offs for constrained systems.
+- Data preprocessing and balanced sampling are critical for fair evaluation.
+
+---
+
+## ⚙️ Tech Stack
+
+- Python 3.10  
+- TensorFlow / Keras  
+- PyTorch + Hugging Face Transformers  
+- BitNet (1-bit quantization)  
+- NumPy, Pandas, Matplotlib, Seaborn  
+- Scikit-learn  
+
+---
+
+## 📂 Project Structure
