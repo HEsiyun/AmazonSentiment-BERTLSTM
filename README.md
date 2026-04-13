@@ -159,23 +159,5 @@ AmazonSentiment-BERTLSTM/
 
 ---
 
-## 🎓 Author
-
-**Siyun He**  
-Khoury College of Computer Sciences, Northeastern University  
-📧 he.siyun@northeastern.edu  
-🌐 [GitHub: HEsiyun](https://github.com/HEsiyun)
-
----
-
-## 💬 Acknowledgments
-
-- **Professor Uzair Ahmad** – Course Instructor, CS6120 Natural Language Processing  
-- **Venelin Valkov** – BERT fine-tuning tutorial  
-- **Jason Brownlee** – LSTM sequence classification guide  
-- **Kye Gomez** – Creator of BitNet quantization library  
-
----
-
 ⭐ **If this project helps you, please give it a star!**
 
